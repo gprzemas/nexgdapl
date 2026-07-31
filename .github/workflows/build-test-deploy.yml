@@ -37,5 +37,35 @@ jobs:
       contents: write
       pages: write
       id-token: write
-    environment: production
+    environment: 
+      name: github-pages
+      url: ${{ steps.deployment.outputs..page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name:  check out of repository
+        uses: actions/checkout@v4
+        with: 
+          token: ${{secrets.GITHUB_TOKEN}}
+      - name: use node.js
+        uses: actions/setup-node@v4      
+        with: 
+          node-revision: '20.x'
+
+      - name: configure github pages
+        uses: actions/configure-pages@v4
+        with:
+          static_site_generator: next
+      - run: npm install
+      - run: npm run build
+      
+      - name: upload artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './out'
+  
+      - name: deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
+    
 
