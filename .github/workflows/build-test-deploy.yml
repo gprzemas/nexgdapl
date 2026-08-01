@@ -2,9 +2,8 @@
 name:  build-test-deploy
 
 on: 
-  push:
   schedule:
-    - cron: "5 12,13 * * *"
+    - cron: "8 12,13 * * *"
       timezone: "Europe/Warsaw"
 
 jobs:
