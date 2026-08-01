@@ -3,12 +3,12 @@ name:  build-test-deploy
 
 on: 
   schedule:
-    - cron: "8 12,13 * * *"
+    - cron: "15 12,13 * * *"
       timezone: "Europe/Warsaw"
 
 jobs:
-  build:
-    runs-on: ubintu-latest
+  build-job:
+    runs-on: ubuntu-latest
     steps:
       - name:  check out of repo
         uses: actions/checkout@v4
@@ -20,9 +20,9 @@ jobs:
       - run:  npm install
       - run:  npm run build
 
-  test:
-    needs: build
-    runs-on: ubintu-latest
+  test-job:
+    needs: build-job
+    runs-on: ubuntu-latest
     steps:
       - name:  check out of repo
         uses: actions/checkout@v4
@@ -34,8 +34,8 @@ jobs:
       - run:  npm install
       - run:  npm test
 
-  deploy:
-    needs: test
+  deploy-job:
+    needs: test-job
     permissions: 
       contents: write
       pages: write
