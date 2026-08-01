@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: ubintu-latest
     steps:
-      - name:  check out of repository
+      - name:  check out of repo
         uses: actions/checkout@v4
         
       - name: use node.js
@@ -21,7 +21,7 @@ jobs:
     needs: build
     runs-on: ubintu-latest
     steps:
-      - name:  check out of repository
+      - name:  check out of repo
         uses: actions/checkout@v4
         
       - name: use node.js
@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name:  check out of repository
+      - name:  check out of repo
         uses: actions/checkout@v4
         with: 
           token: ${{secrets.GITHUB_TOKEN}}
