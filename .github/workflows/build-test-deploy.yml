@@ -89,7 +89,12 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist/app/'
-  
+
+      - name: verify artifacts
+        run: |
+          pwd
+          ls -lR $RUNNER_TEMP
+
       - name: deploy
         id: deployment
         uses: actions/deploy-pages@v4
