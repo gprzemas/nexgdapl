@@ -89,8 +89,7 @@ jobs:
       - name: verify artifacts after build
         run: |
           pwd
-          ls -lR ./src/app/
-          ls -lR ./dist/app/
+          ls -lR ./dist/app/browser/*
 
       - name: upload artifacts
         uses: actions/upload-pages-artifact@v3
