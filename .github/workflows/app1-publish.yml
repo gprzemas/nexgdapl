@@ -6,6 +6,11 @@ on:
       - main
   workflow_dispatch:
 
+# Give the workflow permission to push and publish Pages
+permissions:
+  contents: write
+  pages: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
