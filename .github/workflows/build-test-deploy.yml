@@ -18,10 +18,8 @@ jobs:
         uses: actions/setup-node@v4
         with: 
           node-revision: '20.x'
-      - run: |
-          cd ./app1
-          npm install
-          npm run build
+      - run: npm install --prefix ./app1/
+      - run: npm run build --prefix ./app1/
 
   test-job:
     needs: build-job
