@@ -95,7 +95,7 @@ jobs:
       - name: upload artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist/app/'
+          path: '/home/runner/work/nexgdapl/nexgdapl/app1/dist/app/browser'
 
       - name: verify artifacts
         run: |
