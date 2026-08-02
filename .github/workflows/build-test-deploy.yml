@@ -89,7 +89,7 @@ jobs:
       - name: upload artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'build_outputs_folder/'
+          path: '.'
 
       - name: verify artifacts
         run: |
