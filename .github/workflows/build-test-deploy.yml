@@ -19,7 +19,9 @@ jobs:
         with: 
           node-revision: '20.x'
       - run:  npm install
-      - run:  npm run build
+      - run: |
+          cd ./app1
+          npm run build
 
   test-job:
     needs: build-job
@@ -33,7 +35,9 @@ jobs:
         with: 
           node-revision: '20.x'
       - run:  npm install
-      - run:  npm test
+      - run:  |
+          cd ./app1
+          npm test
 
   deploy-job:
     needs: test-job
@@ -61,12 +65,14 @@ jobs:
         with:
           static_site_generator: next
       - run: npm install
-      - run: npm run build
+      - run: |
+          cd ./app1
+          npm run build
       
       - name: upload artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './out'
+          path: './app1/dist'
   
       - name: deploy
         id: deployment
