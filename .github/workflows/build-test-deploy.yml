@@ -85,7 +85,13 @@ jobs:
 
       - name: Build the application
         run: npm run build
-      
+
+      - name: verify artifacts after build
+        run: |
+          pwd
+          ls -lR ./src/app/
+          ls -lR ./dist/app/
+
       - name: upload artifacts
         uses: actions/upload-pages-artifact@v3
         with:
