@@ -10,20 +10,30 @@ on:
 jobs:
   build-job:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+          working-directory: ./apps/app1  # all 'run' steps use this directory
     steps:
       - name:  check out of repo
         uses: actions/checkout@v4
-        
+
       - name: use node.js
         uses: actions/setup-node@v4
         with: 
           node-revision: '20.x'
-      - run: npm install --prefix ./app1/
-      - run: npm run build --prefix ./app1/
+
+      - name: Install dependencies
+        run:  npm install 
+
+      - name: Build the application
+        run: npm run build
 
   test-job:
     needs: build-job
     runs-on: ubuntu-latest
+    defaults:
+      run:
+          working-directory: ./apps/app1  # all 'run' steps use this directory
     steps:
       - name:  check out of repo
         uses: actions/checkout@v4
@@ -47,7 +57,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+          working-directory: ./apps/app1  # all 'run' steps use this directory
     steps:
       - name:  check out of repo
         uses: actions/checkout@v4
@@ -62,10 +74,9 @@ jobs:
         uses: actions/configure-pages@v4
         with:
           static_site_generator: next
+
       - run: npm install
-      - run: |
-          cd ./app1
-          npm run build
+      - run: npm run build
       
       - name: upload artifacts
         uses: actions/upload-pages-artifact@v3
