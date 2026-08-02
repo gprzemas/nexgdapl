@@ -86,21 +86,10 @@ jobs:
       - name: Build the application
         run: npm run build
 
-      - name: verify artifacts after build
-        run: |
-          pwd
-          ls -lR ./dist/app/browser/*
-
       - name: upload artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '/home/runner/work/nexgdapl/nexgdapl/app1/dist/app/browser'
-
-      - name: verify artifacts
-        run: |
-          pwd
-          ls -lR ./src/app/
-          ls -lR ./dist/app/
+          path: app1/dist/app/browser
 
       - name: deploy
         id: deployment
