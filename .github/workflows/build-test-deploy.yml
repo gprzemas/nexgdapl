@@ -1,5 +1,5 @@
 # 20260731
-name:  build-test-deploy
+name:  build-and-deploy
 
 on: 
 
@@ -51,7 +51,7 @@ jobs:
   #         cd ./app1
   #         npm test
 
-  deploy-job:
+  build-and-deploy-job:
     # needs: build-job
     permissions: 
       contents: write
