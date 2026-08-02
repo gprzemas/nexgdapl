@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-          working-directory: ./app1  # all 'run' steps use this directory
+        working-directory: ./app1  # all 'run' steps use this directory
     steps:
       - name:  check out of repo
         uses: actions/checkout@v4
