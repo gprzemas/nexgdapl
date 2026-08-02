@@ -12,25 +12,25 @@ on:
   #     timezone: "Europe/Warsaw"
 
 jobs:
-  build-job:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./app1  # all 'run' steps use this directory
-    steps:
-      - name:  check out of repo
-        uses: actions/checkout@v4
+  # build-job:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: ./app1  # all 'run' steps use this directory
+  #   steps:
+  #     - name:  check out of repo
+  #       uses: actions/checkout@v4
 
-      - name: use node.js
-        uses: actions/setup-node@v4
-        with: 
-          node-revision: '24.x'
+  #     - name: use node.js
+  #       uses: actions/setup-node@v4
+  #       with: 
+  #         node-revision: '24.x'
 
-      - name: Install dependencies
-        run:  npm install 
+  #     - name: Install dependencies
+  #       run:  npm install 
 
-      - name: Build the application
-        run: npm run build
+  #     - name: Build the application
+  #       run: npm run build
 
   # test-job:
   #   needs: build-job
@@ -52,7 +52,7 @@ jobs:
   #         npm test
 
   deploy-job:
-    needs: build-job
+    # needs: build-job
     permissions: 
       contents: write
       pages: write
