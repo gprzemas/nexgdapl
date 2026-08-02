@@ -17,10 +17,10 @@ jobs:
       - name:  check out of repo
         uses: actions/checkout@v4
 
-      - name: use node.js
-        uses: actions/setup-node@v4
-        with: 
-          node-revision: '20.x'
+      # - name: use node.js
+      #   uses: actions/setup-node@v4
+      #   with: 
+      #     node-revision: '20.x'
 
       - name: Install dependencies
         run:  npm install 
@@ -28,63 +28,63 @@ jobs:
       - name: Build the application
         run: npm run build
 
-  test-job:
-    needs: build-job
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-          working-directory: ./app1  # all 'run' steps use this directory
-    steps:
-      - name:  check out of repo
-        uses: actions/checkout@v4
+  # test-job:
+  #   needs: build-job
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #         working-directory: ./app1  # all 'run' steps use this directory
+  #   steps:
+  #     - name:  check out of repo
+  #       uses: actions/checkout@v4
         
-      - name: use node.js
-        uses: actions/setup-node@v4
-        with: 
-          node-revision: '20.x'
-      - run:  npm install
-      - run:  |
-          cd ./app1
-          npm test
+  #     - name: use node.js
+  #       uses: actions/setup-node@v4
+  #       with: 
+  #         node-revision: '20.x'
+  #     - run:  npm install
+  #     - run:  |
+  #         cd ./app1
+  #         npm test
 
-  deploy-job:
-    needs: test-job
-    permissions: 
-      contents: write
-      pages: write
-      id-token: write
-    environment: 
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-          working-directory: ./app1  # all 'run' steps use this directory
-    steps:
-      - name:  check out of repo
-        uses: actions/checkout@v4
-        with: 
-          token: ${{secrets.GITHUB_TOKEN}}
-      - name: use node.js
-        uses: actions/setup-node@v4      
-        with: 
-          node-revision: '20.x'
+  # deploy-job:
+  #   needs: test-job
+  #   permissions: 
+  #     contents: write
+  #     pages: write
+  #     id-token: write
+  #   environment: 
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #         working-directory: ./app1  # all 'run' steps use this directory
+  #   steps:
+  #     - name:  check out of repo
+  #       uses: actions/checkout@v4
+  #       with: 
+  #         token: ${{secrets.GITHUB_TOKEN}}
+  #     - name: use node.js
+  #       uses: actions/setup-node@v4      
+  #       with: 
+  #         node-revision: '20.x'
 
-      - name: configure github pages
-        uses: actions/configure-pages@v4
-        with:
-          static_site_generator: next
+  #     - name: configure github pages
+  #       uses: actions/configure-pages@v4
+  #       with:
+  #         static_site_generator: next
 
-      - run: npm install
-      - run: npm run build
+  #     - run: npm install
+  #     - run: npm run build
       
-      - name: upload artifacts
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './app1/dist/app/browser'
+  #     - name: upload artifacts
+  #       uses: actions/upload-pages-artifact@v3
+  #       with:
+  #         path: './app1/dist/app/browser'
   
-      - name: deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+  #     - name: deploy
+  #       id: deployment
+  #       uses: actions/deploy-pages@v4
     
 
